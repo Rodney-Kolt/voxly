@@ -5,9 +5,8 @@ services:
     region: oregon
     plan: free
     rootDir: backend
-    # Build compiles TS first, then runs migrations from compiled JS (no ts-node in prod)
-    buildCommand: cd /opt/render/project/src/backend && npm install && npm run build
-    startCommand: cd /opt/render/project/src/backend && npm start
+    buildCommand: npm install && npm run build
+    startCommand: npm start
     healthCheckPath: /health
     envVars:
       - key: NODE_ENV
