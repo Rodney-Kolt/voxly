@@ -76,7 +76,9 @@ export interface ApiError {
   };
 }
 
-// Augment express-session
+// Augment express-session with proper module declaration
+import 'express-session';
+
 declare module 'express-session' {
   interface SessionData {
     userId?: string;
