@@ -1,0 +1,34 @@
+services:
+  - type: web
+    name: voxly-api
+    env: node
+    region: oregon
+    plan: free
+    rootDir: backend
+    # Build compiles TS first, then runs migrations from compiled JS (no ts-node in prod)
+    buildCommand: npm install && npm run build && npm run db:migrate:prod
+    startCommand: npm run start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 4000
+      - key: DATABASE_URL
+        fromDatabase:
+          name: voxly-db
+          property: connectionString
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: FRONTEND_URL
+        sync: false
+
+databases:
+  - name: voxly-db
+    databaseName: voxly
+    user: voxly
+    plan: free
