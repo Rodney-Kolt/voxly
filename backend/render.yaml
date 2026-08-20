@@ -6,9 +6,8 @@ services:
     plan: free
     rootDir: backend
     # Build compiles TS first, then runs migrations from compiled JS (no ts-node in prod)
-    # Using explicit cd backend to ensure we're in the right directory
-    buildCommand: cd backend && npm install && npm run build
-    startCommand: npm start
+    buildCommand: cd /opt/render/project/src/backend && npm install && npm run build
+    startCommand: cd /opt/render/project/src/backend && npm start
     healthCheckPath: /health
     envVars:
       - key: NODE_ENV
